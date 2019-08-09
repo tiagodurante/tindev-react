@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
 import { Link } from "react-router-dom";
 import "./Main.css";
 import api from "../services/api";
@@ -22,6 +23,16 @@ export default function Main({ match }) {
     }
 
     loadUsers();
+  }, [match.params.id]);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3333");
+
+    setTimeout(() => {
+      socket.emit("hello", {
+        message: "Hello World"
+      });
+    }, 3000);
   }, [match.params.id]);
 
   async function handleLike(id) {

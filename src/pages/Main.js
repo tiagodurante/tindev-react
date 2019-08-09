@@ -5,11 +5,13 @@ import "./Main.css";
 import api from "../services/api";
 
 import logo from "../assets/logo.svg";
+import itsamatch from "../assets/itsamatch.png";
 import like from "../assets/like.svg";
 import dislike from "../assets/dislike.svg";
 
 export default function Main({ match }) {
   const [users, setUsers] = useState([]);
+  const [matchDev, setMatchDev] = useState(true);
 
   useEffect(() => {
     async function loadUsers() {
@@ -84,6 +86,30 @@ export default function Main({ match }) {
         </ul>
       ) : (
         <div className="empty">Acabou...</div>
+      )}
+
+      {matchDev && (
+        <div className="match-container">
+          <img src={itsamatch} alt="It's a Match" />
+          <img
+            className="avatar"
+            src="https://avatars2.githubusercontent.com/u/2254731?v=4"
+            alt="Avatar"
+          />
+          <strong>Diego Fernandes</strong>
+          <p>
+            CTO na @Rocketseat. Apaixonado por Javascript, ReactJS, React
+            Native, NodeJS e todo ecossistema em torno dessas tecnologias.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setMatchDev(null);
+            }}
+          >
+            Fechar
+          </button>
+        </div>
       )}
     </div>
   );
